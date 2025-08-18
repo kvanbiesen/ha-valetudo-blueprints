@@ -51,7 +51,7 @@ sequence:
         {%- set ns = namespace(ids=[]) %}
         {% for room in ( segments|default('')|string ).split(',')|map('trim') -%}
           {% if segment_id[room] is defined and is_number( segment_id[room] ) -%}
-              {% set ns.ids = ns.ids + [segment_id[room]] %}
+              {% set ns.ids = ns.ids + [ segment_id[room] | int ] %}
           {%- endif %}
         {%- endfor %}
         {%- set payload = {"segment_ids": ns.ids, "iterations": iterations|default(1)|int, "customOrder": custom_order|default(true)} %}
